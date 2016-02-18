@@ -17,14 +17,7 @@ if( !$postData['orgs'] || empty($postData['orgs']) ) {
 }
 
 // All good, start DB connect
-$db_host		=	$CONFIG['db_host'];
-$db_name		=	$CONFIG['db_name'];
-$db_table_name	=	$CONFIG['db_table_name'];
-$db_user		=	$CONFIG['db_user'];
-$db_pass		=	$CONFIG['db_pass'];
-
-// Connect to DB
-$mysqli = new mysqli($db_host, $db_user, $db_pass, $db_name);
+$mysqli = new mysqli($CONFIG['db_host'], $CONFIG['db_user'], $CONFIG['db_pass'], $CONFIG['db_name']);
 
 if ($mysqli->connect_errno) {
 	http_response_code(503);
@@ -36,7 +29,7 @@ foreach ($postData['orgs'] as $org => $size) {
 	$org = $mysqli->real_escape_string($org);
 	$size = round(intval($size)/1024/1024);	// Bytes to MiB
 	//
-	$sql = "INSERT INTO $db_table_name (org, storage_mib) VALUES ('$org', $size)";
+	$sql = "INSERT INTO $CONFIG['db_table_name'] (org, storage_mib) VALUES ('$org', $size)";
 	// Exit on error
 	if (!$result = $mysqli->query($sql)) {
 		http_response_code(500);
