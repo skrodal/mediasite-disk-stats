@@ -17,7 +17,7 @@ JSON object to be POSTed to this service (org : bytes):
 
 ### Table
 
-'''
+```
 CREATE TABLE `TABLE_NAME` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -25,7 +25,7 @@ CREATE TABLE `TABLE_NAME` (
   `storage_mib` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-'''
+```
 
 ### Record insert
 
