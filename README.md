@@ -8,12 +8,14 @@ One record per org per day.
 
 JSON object to be POSTed to this service (org : bytes):
 
+```
 {
   "org_1_name": 911990784,
   "org_2_name": 1054732032,
   ..., 
   ...
 }
+```
 
 ### Table
 
