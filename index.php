@@ -24,12 +24,15 @@ if ($mysqli->connect_errno) {
 	exit ( json_encode(array("status" => false, "message" => "Service Unavailable (DB connection failed)")) );
 }
 
+$db_table_name	=	$CONFIG['db_table_name'];
+
 // Loop each org and save storage in db
 foreach ($postData['orgs'] as $org => $size) {
 	$org = $mysqli->real_escape_string($org);
 	$size = round(intval($size)/1024/1024);	// Bytes to MiB
+
 	//
-	$sql = "INSERT INTO $CONFIG['db_table_name'] (org, storage_mib) VALUES ('$org', $size)";
+	$sql = "INSERT INTO $db_table_name (org, storage_mib) VALUES ('$org', $size)";
 	// Exit on error
 	if (!$result = $mysqli->query($sql)) {
 		http_response_code(500);
