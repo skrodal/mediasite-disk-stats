@@ -39,6 +39,7 @@ Note: byte storage is converted to mib before insert:
 
 ### Test
 
+```
 curl -X "POST" "https://url_to_service" \
 	-d $'{
   "token": "...",
@@ -48,3 +49,4 @@ curl -X "POST" "https://url_to_service" \
     "...": ...
   }
 }'
+```
