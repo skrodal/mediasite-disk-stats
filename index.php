@@ -6,7 +6,7 @@ $access_token	=	$CONFIG['access_token'];
 // 
 $postData = json_decode(file_get_contents('php://input'), true);
 
-var_dump($postData);
+var_dump($access_token);
 
 // Missing/wrong access token from POST
 if( !$postData['token'] || $postData['token'] !== $access_token) {
