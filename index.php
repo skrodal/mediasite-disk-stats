@@ -9,12 +9,12 @@ $postData = json_decode(file_get_contents('php://input'), true);
 // Missing/wrong access token from POST
 if( !$postData['token'] || $postData['token'] !== $access_token) {
 	http_response_code(401);
-	exit ( json_encode(array("status" => false, "message" => "Unauthorized")) );
+	exit ( json_encode(array("status" => false, "message" => "401 Unauthorized")) );
 }
 // No org content POSTed
 if( !$postData['orgs'] || empty($postData['orgs']) ) {
 	http_response_code(400);
-	exit ( json_encode(array("status" => false, "message" => "No Content")) );
+	exit ( json_encode(array("status" => false, "message" => "400 No Content")) );
 }
 
 // All good, start DB connect
@@ -22,7 +22,7 @@ $mysqli = new mysqli($CONFIG['db_host'], $CONFIG['db_user'], $CONFIG['db_pass'],
 
 if ($mysqli->connect_errno) {
 	http_response_code(503);
-	exit ( json_encode(array("status" => false, "message" => "Service Unavailable (DB connection failed)")) );
+	exit ( json_encode(array("status" => false, "message" => "503 Service Unavailable (DB connection failed)")) );
 }
 
 $db_table_name	=	$CONFIG['db_table_name'];
@@ -37,10 +37,10 @@ foreach ($postData['orgs'] as $org => $size) {
 	// Exit on error
 	if (!$result = $mysqli->query($sql)) {
 		http_response_code(500);
-		exit ( json_encode(array("status" => false, "message" => "Internal Server Error (DB INSERT failed):" )) ); //. $mysqli->error
+		exit ( json_encode(array("status" => false, "message" => "500 Internal Server Error (DB INSERT failed):" )) ); //. $mysqli->error
 	}
 }
 
 // All good!
 http_response_code(201);
-exit ( json_encode(array("status" => true, "message" => "Created")) );
+exit ( json_encode(array("status" => true, "message" => "201 Created")) );
