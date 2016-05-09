@@ -1,4 +1,4 @@
-# Mediasite Disk Stats
+# Mediasite Disk Stats #
 
 _This API is tailor-made for UNINETT AS for a specific use-case. As it does **not** access Sonic Foundry's official Mediasite API, its re-usability is limited._
 
@@ -8,7 +8,7 @@ Ett innslag (record) per org per dag.
 
 Script som dumper data til denne service'n kjøres en gang i døgnet (cron?) og er administrert av noen(tm) i 4etg. 
 
-### JSON
+## JSON ##
 
 JSON-objektet som POSTes til denne service'n må ha følgende format (org : bytes):
 
@@ -25,7 +25,7 @@ JSON-objektet som POSTes til denne service'n må ha følgende format (org : byte
 
 ...der en hemmelig `token` (definert i config) styrer aksept av innslag. Script som POSTer må altså sende med samme token.
 
-### Tabell
+## Tabell ##
 
 ```
 CREATE TABLE `TABLE_NAME` (
@@ -37,13 +37,13 @@ CREATE TABLE `TABLE_NAME` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ```
 
-### Record insert
+## Record insert ##
 
 Obs: byte storage blir konvertert til `mib` før innslag blir lagret i tabellen:
 
 > 'storage_mib' int(11) muliggjør en maksverdi av 4294967295mib (== 4095tib), noe som burde holde en god stund...
 
-### Test
+## Test ##
 
 ```
 curl -X "POST" "https://url_to_service" \
@@ -56,3 +56,7 @@ curl -X "POST" "https://url_to_service" \
   }
 }'
 ```
+
+### Annet ###
+
+Utviklet av Simon Skrødal
