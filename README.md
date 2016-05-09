@@ -1,12 +1,16 @@
 # Mediasite Disk Stats
 
-This Web Service serves a single purpose: receive disk storage consumption per folder (i.e. org) as POST-data (JSON) and store this in a (MySQL) table.
+_This API is tailor-made for UNINETT AS for a specific use-case. As it does **not** access Sonic Foundry's official Mediasite API, its re-usability is limited._
 
-One record per org per day.
+Dette er en veldig enkel Web Service som gjør kun en ting: ta imot diskforbruk per folder (org) som POST-data (JSON) og lagre dette in en MySQL tabell. 
+
+Ett innslag (record) per org per dag.
+
+Script som dumper data til denne service'n kjøres en gang i døgnet (cron?) og er administrert av noen(tm) i 4etg. 
 
 ### JSON
 
-JSON object to be POSTed to this service (org : bytes):
+JSON-objektet som POSTes til denne service'n må ha følgende format (org : bytes):
 
 ```
 {
@@ -19,7 +23,9 @@ JSON object to be POSTed to this service (org : bytes):
 }
 ```
 
-### Table
+...der en hemmelig `token` (definert i config) styrer aksept av innslag. Script som POSTer må altså sende med samme token.
+
+### Tabell
 
 ```
 CREATE TABLE `TABLE_NAME` (
@@ -33,9 +39,9 @@ CREATE TABLE `TABLE_NAME` (
 
 ### Record insert
 
-Note: byte storage is converted to mib before insert:
+Obs: byte storage blir konvertert til `mib` før innslag blir lagret i tabellen:
 
-> 'storage_mib' int(11) allows a max value of 4294967295mib (== 4095tib), which should suffice for the foreseable future...
+> 'storage_mib' int(11) muliggjør en maksverdi av 4294967295mib (== 4095tib), noe som burde holde en god stund...
 
 ### Test
 
